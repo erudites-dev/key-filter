@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[1,)"
+license="LGPL-3.0-only"
+issueTrackerURL="https://github.com/erudites-dev/key-filter/issues"
+
+[[mods]]
+modId="keyfilter"
+displayName="Key Filter"
+version="${version}"
+logoFile= "assets/keyfilter/icon.png"
+authors="shihyeon"
+description='''
+Manages keybinding visibility, input handling, and rebind protection.
+'''
+modUrl="https://modrinth.com/mod/key-filter"
+displayURL="https://modrinth.com/mod/key-filter"
+
+[[mixins]]
+config="keyfilter.mixins.json"
+
+[[dependencies.keyfilter]]
+modId="minecraft"
+type="required"
+versionRange="[${minecraft_version},)"
+ordering="NONE"
+side="CLIENT"

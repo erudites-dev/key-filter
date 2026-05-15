@@ -1,0 +1,50 @@
+{
+  "schemaVersion": 1,
+  "id": "keyfilter",
+  "version": "${version}",
+  "name": "Key Filter",
+  "description": "Manages keybinding visibility, input handling, and rebind protection.",
+  "authors": [
+    {
+      "name": "shihyeon",
+      "contact": {
+        "sources": "https://github.com/shihyeon"
+      }
+    }
+  ],
+  "contact": {
+    "homepage": "https://modrinth.com/mod/key-filter",
+    "sources": "https://github.com/erudites-dev/key-filter",
+    "issues": "https://github.com/erudites-dev/key-filter/issues"
+  },
+  "license": "LGPL-3.0-only",
+  "icon": "assets/keyfilter/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "dev.erudites.mods.keyfilter.fabric.client.KeyFilterFabricClientMod"
+    ],
+    "modmenu": [
+      "dev.erudites.mods.keyfilter.fabric.client.integrations.ModMenuIntegration"
+    ]
+  },
+  "mixins": [
+    "keyfilter.mixins.json"
+  ],
+  "depends": {
+    "java": ">=25",
+    "fabricloader": ">=${fabric_loader_version}",
+    "minecraft": ">=${minecraft_version}"
+  },
+  "suggests": {
+    "modmenu": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "links": {
+        "modmenu.modrinth": "https://modrinth.com/mod/key-filter",
+        "modmenu.curseforge": "https://www.curseforge.com/minecraft/mc-mods/key-filter"
+      }
+    }
+  }
+}

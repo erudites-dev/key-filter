@@ -1,0 +1,14 @@
+{
+  "key.category.keyfilter.keyfilter": "Key Filter",
+  "key.keyfilter.open_config": "Key Filter 설정 열기",
+  "gui.keyfilter.config.title": "Key Filter 설정",
+  "gui.keyfilter.button.lock": "잠금",
+  "gui.keyfilter.button.unlock": "잠금 해제",
+  "gui.keyfilter.button.show": "보이기",
+  "gui.keyfilter.button.hide": "숨기기",
+  "gui.keyfilter.button.enable": "활성화",
+  "gui.keyfilter.button.disable": "비활성화",
+  "gui.keyfilter.button.reset_locked": "잠금 초기화",
+  "gui.keyfilter.button.reset_hidden": "숨기기 초기화",
+  "gui.keyfilter.button.reset_disabled": "비활성화 초기화"
+}

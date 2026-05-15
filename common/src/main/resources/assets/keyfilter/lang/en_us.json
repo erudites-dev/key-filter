@@ -1,0 +1,14 @@
+{
+  "key.category.keyfilter.keyfilter": "Key Filter",
+  "key.keyfilter.open_config": "Open Key Filter Config",
+  "gui.keyfilter.config.title": "Key Filter Configuration",
+  "gui.keyfilter.button.lock": "Lock",
+  "gui.keyfilter.button.unlock": "Unlock",
+  "gui.keyfilter.button.show": "Show",
+  "gui.keyfilter.button.hide": "Hide",
+  "gui.keyfilter.button.enable": "Enable",
+  "gui.keyfilter.button.disable": "Disable",
+  "gui.keyfilter.button.reset_locked": "Reset Locked",
+  "gui.keyfilter.button.reset_hidden": "Reset Hidden",
+  "gui.keyfilter.button.reset_disabled": "Reset Disabled"
+}
