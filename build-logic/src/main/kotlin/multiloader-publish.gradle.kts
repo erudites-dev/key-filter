@@ -69,6 +69,7 @@ gradle.projectsEvaluated {
                     modLoaders.add("quilt")
                     version = "mc${minecraftVersion}-${BuildConfig.MOD_VERSION}-fabric"
                     displayName = "Key Filter ${BuildConfig.MOD_VERSION} for Fabric ${BuildConfig.MINECRAFT_VERSION}"
+                    requires("fabric-api")
                 }
             }
 
@@ -80,6 +81,7 @@ gradle.projectsEvaluated {
                     modLoaders.add("quilt")
                     version = "mc${minecraftVersion}-${BuildConfig.MOD_VERSION}-fabric"
                     displayName = "Key Filter ${BuildConfig.MOD_VERSION} for Fabric ${BuildConfig.MINECRAFT_VERSION}"
+                    requires("fabric-api")
                 }
             }
         }
