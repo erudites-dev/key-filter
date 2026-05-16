@@ -40,7 +40,7 @@ public class HiddenKeysList extends ContainerObjectSelectionList<HiddenKeysList.
     private final FilteredKeysConfigScreen screen;
 
     public HiddenKeysList(Minecraft minecraft, FilteredKeysConfigScreen screen) {
-        super(minecraft, screen.width, screen.height - 65, 33, 20);
+        super(minecraft, screen.width, screen.layout.getContentHeight(), screen.layout.getHeaderHeight(), 20);
         this.screen = screen;
         KeyMapping[] keyMappings = ArrayUtils.clone(minecraft.options.keyMappings);
         Arrays.sort(keyMappings);

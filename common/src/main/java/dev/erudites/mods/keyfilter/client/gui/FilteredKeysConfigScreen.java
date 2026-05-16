@@ -5,6 +5,8 @@ import dev.erudites.mods.keyfilter.client.config.KeyFilterConfig;
 import net.minecraft.client.KeyMapping;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.layouts.HeaderAndFooterLayout;
+import net.minecraft.client.gui.layouts.LinearLayout;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.client.input.KeyEvent;
 import net.minecraft.client.input.MouseButtonEvent;
@@ -12,9 +14,15 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import org.jspecify.annotations.Nullable;
 
+import java.util.Set;
+
 public class FilteredKeysConfigScreen extends Screen {
 
+    private static final int FOOTER_BTN_WIDTH = 100;
+    private static final int FOOTER_BTN_SPACING = 8;
+
     private final Screen lastScreen;
+    public final HeaderAndFooterLayout layout = new HeaderAndFooterLayout(this);
     private HiddenKeysList list;
     private Button resetLockedButton;
     private Button resetHiddenButton;
@@ -30,32 +38,41 @@ public class FilteredKeysConfigScreen extends Screen {
 
     @Override
     protected void init() {
-        this.list = new HiddenKeysList(this.minecraft, this);
-        this.addRenderableWidget(this.list);
-        int buttonY = this.height - 29;
-        int buttonWidth = 100;
-        int gap = 5;
-        int totalWidth = buttonWidth * 4 + gap * 3;
-        int startX = this.width / 2 - totalWidth / 2;
-        this.resetLockedButton = this.addRenderableWidget(Button.builder(Component.translatable("gui.keyfilter.button.reset_locked"), _ -> {
-            KeyFilterConfig.get().lockedKeys.clear();
-            KeyFilterConfig.save();
-            this.minecraft.setScreen(new FilteredKeysConfigScreen(this.lastScreen));
-        }).bounds(startX, buttonY, buttonWidth, 20).build());
-        this.resetHiddenButton = this.addRenderableWidget(Button.builder(Component.translatable("gui.keyfilter.button.reset_hidden"), _ -> {
-            KeyFilterConfig.get().hiddenKeys.clear();
-            KeyFilterConfig.save();
-            this.minecraft.setScreen(new FilteredKeysConfigScreen(this.lastScreen));
-        }).bounds(startX + buttonWidth + gap, buttonY, buttonWidth, 20).build());
-        this.resetDisabledButton = this.addRenderableWidget(Button.builder(Component.translatable("gui.keyfilter.button.reset_disabled"), _ -> {
-            KeyFilterConfig.get().disabledKeys.clear();
-            KeyFilterConfig.save();
-            this.minecraft.setScreen(new FilteredKeysConfigScreen(this.lastScreen));
-        }).bounds(startX + (buttonWidth + gap) * 2, buttonY, buttonWidth, 20)
-            .build());
-        this.addRenderableWidget(Button.builder(CommonComponents.GUI_DONE, _ -> this.minecraft.setScreen(this.lastScreen))
-            .bounds(startX + (buttonWidth + gap) * 3, buttonY, buttonWidth, 20)
-            .build());
+        this.layout.addTitleHeader(this.title, this.font);
+        this.list = this.layout.addToContents(new HiddenKeysList(this.minecraft, this));
+        LinearLayout footer = this.layout.addToFooter(LinearLayout.horizontal().spacing(FOOTER_BTN_SPACING));
+        this.resetLockedButton = footer.addChild(Button.builder(
+            Component.translatable("gui.keyfilter.button.reset_locked"),
+            _ -> this.resetSet(KeyFilterConfig.get().lockedKeys)
+        ).width(FOOTER_BTN_WIDTH).build());
+        this.resetHiddenButton = footer.addChild(Button.builder(
+            Component.translatable("gui.keyfilter.button.reset_hidden"),
+            _ -> this.resetSet(KeyFilterConfig.get().hiddenKeys)
+        ).width(FOOTER_BTN_WIDTH).build());
+        this.resetDisabledButton = footer.addChild(Button.builder(
+            Component.translatable("gui.keyfilter.button.reset_disabled"),
+            _ -> this.resetSet(KeyFilterConfig.get().disabledKeys)
+        ).width(FOOTER_BTN_WIDTH).build());
+        footer.addChild(Button.builder(
+            CommonComponents.GUI_DONE,
+            _ -> this.minecraft.setScreen(this.lastScreen)
+        ).width(FOOTER_BTN_WIDTH).build());
+        this.layout.visitWidgets(this::addRenderableWidget);
+        this.repositionElements();
+    }
+
+    private void resetSet(Set<String> set) {
+        set.clear();
+        KeyFilterConfig.save();
+        this.minecraft.setScreen(new FilteredKeysConfigScreen(this.lastScreen));
+    }
+
+    @Override
+    protected void repositionElements() {
+        this.layout.arrangeElements();
+        if (this.list != null) {
+            this.list.updateSize(this.width, this.layout);
+        }
     }
 
     @Override
@@ -65,7 +82,6 @@ public class FilteredKeysConfigScreen extends Screen {
         this.resetHiddenButton.active = !config.hiddenKeys.isEmpty();
         this.resetDisabledButton.active = !config.disabledKeys.isEmpty();
         super.extractRenderState(graphics, mouseX, mouseY, a);
-        graphics.centeredText(this.font, this.title, this.width / 2, 12, -1);
     }
 
     @Override
