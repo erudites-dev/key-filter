@@ -55,7 +55,7 @@ public class FilteredKeysConfigScreen extends Screen {
         ).width(FOOTER_BTN_WIDTH).build());
         footer.addChild(Button.builder(
             CommonComponents.GUI_DONE,
-            _ -> this.minecraft.setScreen(this.lastScreen)
+            _ -> this.minecraft.gui.setScreen(this.lastScreen)
         ).width(FOOTER_BTN_WIDTH).build());
         this.layout.visitWidgets(this::addRenderableWidget);
         this.repositionElements();
@@ -64,7 +64,7 @@ public class FilteredKeysConfigScreen extends Screen {
     private void resetSet(Set<String> set) {
         set.clear();
         KeyFilterConfig.save();
-        this.minecraft.setScreen(new FilteredKeysConfigScreen(this.lastScreen));
+        this.minecraft.gui.setScreen(new FilteredKeysConfigScreen(this.lastScreen));
     }
 
     @Override

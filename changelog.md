@@ -1,8 +1,9 @@
 ### Requirements
 - Java 25
-- Minecraft 26.1.x
+- Minecraft 26.2
 - Fabric loader 0.19.2
-- NeoForge 26.1.0.x
+- Fabric API 0.152.1+26.2
+- NeoForge 26.2.x
 
 ### Changes (0.1.1)
-- Switched config screen from manual coordinates to HeaderAndFooterLayout
+- Updated to Minecraft 26.2

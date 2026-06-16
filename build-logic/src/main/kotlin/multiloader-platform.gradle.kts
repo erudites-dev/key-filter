@@ -17,6 +17,7 @@ tasks {
             "minecraft_version" to BuildConfig.MINECRAFT_VERSION_MIN
                 .replace("(?<=\\D)-".toRegex(), "."), // fabric snapshot test
             "fabric_loader_version" to BuildConfig.FABRIC_LOADER_VERSION,
+            "fabric_api_version" to BuildConfig.FABRIC_API_VERSION,
             "neoforge_version" to BuildConfig.NEOFORGE_VERSION
         )
 

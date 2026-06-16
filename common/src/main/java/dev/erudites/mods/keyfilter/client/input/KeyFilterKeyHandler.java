@@ -27,8 +27,8 @@ public final class KeyFilterKeyHandler {
 
     public static void tick(Minecraft minecraft) {
         while (CONFIG_KEY_MAPPING.consumeClick()) {
-            if (minecraft.screen == null) {
-                minecraft.setScreen(new FilteredKeysConfigScreen(null));
+            if (minecraft.gui.screen() == null) {
+                minecraft.gui.setScreen(new FilteredKeysConfigScreen(null));
             }
         }
     }
